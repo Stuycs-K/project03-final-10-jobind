@@ -33,3 +33,7 @@ conflicts.
 1/9: Completion of diplomatic features.
 1/11: Completion of war mechanics and land seizure.
 1/16: Fine-tuning of gameplay complete.
+
+# Back-up plan for downsizing (Just in case)
+
+Singleplayer nation sim.
