@@ -2,28 +2,34 @@
 
 ## Group Members:
 
-names here.
+David Jobin
        
 # Intentions:
 
-A statement of the problem you are solving and/or a high level description of the project.
+I set out to create a signleplayer, civ-like strategy game, focused on diplomacy and natural resources.
+The player controls a nation-state and competes against "AI" (Randomly controlled) opponent nations.
+The goal is to demonstrate national superiority through one of three ways:
+       By Eliminating all rival nations,
+       By controlling a majority of the world's GDP,
+       or By creating a world-dominating military alliance.
     
 # Intended usage:
 
-A description as to how the project will be used (describe the user interface).
+Each player turn will represent a year of running their country.
+Play will be divided into phases, each dedicated to controlling certain aspects of the nation,
+such as the economy, alliances with others, and war.
+The gameplay will consist of typing into the prompt and looking at numbers in charts.
   
 # Technical Details:
 
-A description of your technical design. This should include:
-   
-How you will be using the topics covered in class in the project.
-     
-How you are breaking down the project and who is responsible for which parts.
-  
-What data structures you will be using and how.
-     
-What algorithms and /or data structures you will be using, and how.
-    
+Each country will be run with forking processes, with pipes acting as communication
+between the different nations.
+Files will be used to store regional data, and semaphores will be used to limit troop presence during
+conflicts.
+
 # Intended pacing:
 
-A timeline with expected completion dates of parts of the project.
+1/7: Completion of the structures needed to handle nations and their domestic actions.
+1/9: Completion of diplomatic features.
+1/11: Completion of war mechanics and land seizure.
+1/16: Fine-tuning of gameplay complete.
