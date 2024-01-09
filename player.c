@@ -2,11 +2,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "nation.h"
 //This initializes persistant vlaues relevant to the player nation. int difficulty ranges from 1 to 4
-//Returns an int[] containing the data for the player nation
-int* playersetup(char*name,int difficulty){
-    int* i = malloc(100*sizeof(int));
-    return i;
+//Returns a pointer to struct country, found in nation.h containing the data for the player nation
+struct country* playersetup(char*_name,int difficulty){
+    struct country* c = malloc(sizeof(struct country));
+    strcpy(c->name,_name);
+    c->dif=difficulty;
+    return c;
 }
 //Returns name of nation.
 char* countryname(){
@@ -26,7 +29,7 @@ char* countryname(){
 }
 int difficultyselect(){
     while(1){
-        printf("---------------\nDifficulties- 1=Easy, 2=Normal, 3=Tough, 4=Unfair\nEnter the difficulty of managing your nation (1-4): ");
+        printf("---------------\nDifficulties- 1=Easy, 2=Normal, 3=Tough, 4=Unfair: ");
         int d[1];
         char s[100];
         fgets(s,100,stdin);
@@ -37,10 +40,12 @@ int difficultyselect(){
         printf("Not an integer from 1-4! Try again\n");
     }
 }
-void birth(){
+struct country* birth(){
     char *s = countryname();
+    printf("Enter the difficulty of managing your nation. (1-4)\n");
     int dif = difficultyselect();
     printf("DIFFICULTY SELECTED: %d\n", dif);
-    playersetup(s,dif);
+    struct country* c = playersetup(s,dif);
     printf("Congratulations! You have founed the nation of %s!\n", s);
+    return c;
 }
