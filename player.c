@@ -3,8 +3,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 //This initializes persistant vlaues relevant to the player nation. int difficulty ranges from 1 to 4
-void playersetup(char*name,int difficulty){
-
+//Returns an int[] containing the data for the player nation
+int* playersetup(char*name,int difficulty){
+    int* i = malloc(100*sizeof(int));
+    return i;
 }
 //Returns name of nation.
 char* countryname(){
