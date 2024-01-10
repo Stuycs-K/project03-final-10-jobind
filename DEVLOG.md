@@ -13,7 +13,14 @@ Fragmented the parts into separate files,
 linked with the makefile, and created basic
 initialization of structures.
 
-### 2024-01-8 - Reorganized player initialization
+### 2024-01-08 - Reorganized player initialization
 Moved functions out of main, now debugged and
 in player, used to initialize the starting nation.
 Added difficulty selection.
+
+### 2024-01-09 - Introduced rival nations and structs
+After the player is initialized, a variable list of
+struct country pointers is created. Many currently
+unused values, like GDP and military rating, have been
+set up and are ready for implementation. The structure
+of future code is roadmapped in main.c with many comments.
