@@ -4,13 +4,11 @@
 ### Soliloquy Studios
 
 David Jobin (Lead designer, Executive programming lead, Chief executive, Treasurer)
-       
-### Project Description:
 
-This is a light-weight, singleplayer, nation-based strategy game, with minimal economic and military mechanics, and simple win conditions.
-The player runs a country, hell-bent on being better than the others. Luckily, the non-player nations are controlled through chance,
-so with careful thought and knowledge of mechanics, the player can consistantly win.
-*It's text-based and turn-based.
+### Project Description:
+Light-weight, text-based, multipler, nation-based strategy game, economic, diplomatic, and military functionalities.
+The players run countries, hell-bent on being better than the others. Luckily, the non-player nations are controlled through chance,
+so with careful thought and knowledge of mechanics, winning is feasible.
   
 ### Instructions:
 
