@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "player.h"
-//struct country {int dif; char name[100];};
-
+//NOTES IN h FILE:
+struct country {int dif; int GDP; int wealth; int military; char name[100]; struct domain* _domain; };
 //function lets the player select how many enemy nations there are
 int rivalcount(){
     while(1){
@@ -19,9 +19,21 @@ int rivalcount(){
         printf("Not an integer from 1-9! Try again\n");
     }
 }
+struct country* nationsetup(char*_name, int _dif){
+    struct country* c = malloc(sizeof(struct country));
+    strcpy(c->name,_name);
+    c->dif=_dif;
+    return c;
+}
 struct country** rivalbirth(){
     int n = rivalcount();
     printf("Enter the AI level of the rival nations. (1-4) \n");
-    int d = difficultyselect();
-    return NULL;
+    int d = 5-difficultyselect(); //we have to subtract dif from 5, since harder enemies -> lower dif, since they get better odds.
+    struct country** w = malloc(n*sizeof(struct country*));
+    for(int i=0; i<n; ++i){
+        char name[100];
+        sprintf(name,"%d",i);
+        w[i]=nationsetup(name,d);
+    }
+    return w;
 }

@@ -5,10 +5,10 @@
 #include "nation.h"
 //This initializes persistant vlaues relevant to the player nation. int difficulty ranges from 1 to 4
 //Returns a pointer to struct country, found in nation.h containing the data for the player nation
-struct country* playersetup(char*_name,int difficulty){
+struct country* playersetup(char*_name,int _dif){
     struct country* c = malloc(sizeof(struct country));
     strcpy(c->name,_name);
-    c->dif=difficulty;
+    c->dif=_dif;
     return c;
 }
 //Returns name of nation.

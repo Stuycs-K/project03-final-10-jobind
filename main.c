@@ -9,7 +9,7 @@ int main(){
     int year = 0;
     printf("\nWelcome to RisC and DiplomaC! Defeat the rival nations and take control!\n");
     struct country* playernation = birth();
-    rivalbirth();
+    struct country** r = rivalbirth();
     //rivalInit
     //terrainInit
     return 0;
