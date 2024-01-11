@@ -1,8 +1,13 @@
-default: run
 compile: main.o nation.o player.o territory.o
 	@gcc -o game main.o nation.o player.o territory.o
-run: compile
+compile-client: client.o nation.o player.o territory.o
+	@gcc -o client client.o nation.o player.o territory.o
+server: compile
 	@./game
+client: compile-client
+	@./client
+client.o: client.c nation.h player.h territory.h
+	@gcc -c client.c
 main.o: main.c nation.h player.h territory.h
 	@gcc -c main.c
 nation.o: nation.c player.h territory.h
@@ -14,3 +19,4 @@ territory.o: territory.c nation.h player.h
 clean:
 	rm -rf *.o
 	rm -rf game
+	rm -rf client
