@@ -6,8 +6,8 @@ David Jobin
        
 # Intentions:
 
-I set out to create a signleplayer, civ-like strategy game, focused on diplomacy and natural resources.
-The player controls a nation-state and competes against "AI" (Randomly controlled) opponent nations.
+I set out to create a single or multiplayer, civ-like strategy game, focused on diplomacy and management.
+The players control nation-states and compete against "AI" (Randomly controlled) opponent nations.
 The goal is to demonstrate national superiority through one of three ways:
        By Eliminating all rival nations,
        By controlling a majority of the world's GDP,
@@ -18,14 +18,14 @@ The goal is to demonstrate national superiority through one of three ways:
 Each player turn will represent a year of running their country.
 Play will be divided into phases, each dedicated to controlling certain aspects of the nation,
 such as the economy, alliances with others, and war.
-The gameplay will consist of typing into the prompt and looking at numbers in charts.
-  
+The gameplay will consist of typing into the prompt and looking at numbers in charts, and at
+rudimentary maps of battlefields.
+
 # Technical Details:
 
-Each country will be run with forking processes, with pipes acting as communication
-between the different nations.
-Files will be used to store regional data, and semaphores will be used to limit troop presence during
-conflicts.
+Each player country will be a client, connecting to the server, which runs the AIs.
+Files will be used to store regional data and troop movements.
+
 
 # Intended pacing:
 

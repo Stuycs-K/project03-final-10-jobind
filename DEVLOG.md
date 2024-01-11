@@ -24,3 +24,8 @@ struct country pointers is created. Many currently
 unused values, like GDP and military rating, have been
 set up and are ready for implementation. The structure
 of future code is roadmapped in main.c with many comments.
+
+### 2024-01-10 - Rethought project and outlined server-client mechanics.
+Scrapped forking ideas in favor of server-client functionality, so that
+many players can join. Thought out player-player, robot-robot, and player-robot
+interactions. "robot" would just be the server file.
