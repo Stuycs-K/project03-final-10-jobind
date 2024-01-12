@@ -34,7 +34,8 @@ char * prompt(int sd){
 }
 int main(){
     int sd = client_tcp_handshake(NULL);
-    char* name = countryname();
-    write(sd, name, 100);
+    struct country* mycountry= birth();
+    write(sd, mycountry, sizeof(struct country));
+    printf("Waiting for server...\n");
     return 0;
 }

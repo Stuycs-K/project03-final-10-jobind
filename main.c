@@ -13,6 +13,13 @@
  *return the to_client socket descriptor
  *blocks until connection is made.
  */
+int numprompt(){
+    int d[1];
+    char s[100];
+    fgets(s,100,stdin);
+    sscanf(s,"%d",d);
+    return *d;
+}
 int server_tcp_handshake(int listen_socket){
     int client_socket;
     socklen_t sock_size;
@@ -49,26 +56,30 @@ int server_setup(){
     return sd;
 }
 int main(){
-    int year = 0;
-        //printf("\nWelcome to RisC and DiplomaC! Defeat the rival nations and take control!\n");
-    //initiates data for the player nation
-        //struct country* playernation = birth();
-    //initiates the data for the rivals
-        //struct country** rivals = rivalbirth();
-    //terrainInit
-    //**REPLACE W/ TERRAIN GEN
-    //Below: Initializes diplomatic relations between all nations, semi-randomly
-    //**REPLACE W/ DIPLOM. GEN
-    
-    //Main Loop (player):
-    //**LOOP BODY HERE
-    //End of main Loop (player):
+    int year, players, AIs;
+    printf("Welcome to the server-side of RisC and DiplomaC! Please enter the number of clients that will be connecting: ");
+    players = numprompt();
+    printf("Waiting for connections...\n");
+    if(players<=0){
+        printf("No players, no game. Exiting...\n");
+        return 0;
+    }
     
     //****WIN-LOSE STATE****
     int ld = server_setup();
-    int cd = server_tcp_handshake(ld);
-    char name[100];
-    read(cd,name,100);
-    printf("%s\n",name);
+    int descs[players];
+    for(int i=0; i<players; i++){
+        descs[i]=server_tcp_handshake(ld);
+    }
+    printf("All connected!\n");
+    //char* curname;
+    struct country* curcountry;
+    for(int i=0; i<players; i++){
+        //curname = calloc(100,sizeof(char));
+        curcountry = calloc(1,sizeof(struct country));
+        read(descs[i],curcountry,sizeof(struct country));
+        //printf("%d: %s\n", i, curname);
+        printf("Data from nation %d received.", i);
+    }
     return 0;
 }

@@ -12,5 +12,7 @@ so with careful thought and knowledge of mechanics, winning is feasible.
   
 ### Instructions:
 
-Just use make run! No args or libraries necessary.
-The user interacts by typing. And hitting enter. Avoid using ctrl+D.
+First start the server with make server, then enter the number of clients that will be connecting.
+After that, use make client and enter the ip of the server.
+
+The user interacts by typings, And hitting enter. Avoid using ctrl+D.
