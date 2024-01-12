@@ -29,3 +29,6 @@ of future code is roadmapped in main.c with many comments.
 Scrapped forking ideas in favor of server-client functionality, so that
 many players can join. Thought out player-player, robot-robot, and player-robot
 interactions. "robot" would just be the server file.
+
+### 2024-01-11 - Established server-client infrastructure.
+Also updated the proposal match scope changes.

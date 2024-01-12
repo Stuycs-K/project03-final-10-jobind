@@ -9,6 +9,22 @@
 #include "player.h"
 #include "nation.h"
 #include "territory.h"
+/*Accept a connection from a client
+ *return the to_client socket descriptor
+ *blocks until connection is made.
+ */
+int server_tcp_handshake(int listen_socket){
+    int client_socket;
+    socklen_t sock_size;
+    struct sockaddr_storage client_address;
+    sock_size = sizeof(client_address);
+
+    //accept the client connection
+    client_socket = accept(listen_socket,(struct sockaddr *)&client_address, &sock_size);
+    //printf("No block?\n");
+    return client_socket;
+}
+
 int server_setup(){
     //use getaddrinfo
     struct addrinfo * hints, * results;
@@ -25,6 +41,7 @@ int server_setup(){
     bind(sd, results->ai_addr, results->ai_addrlen);
 
     //DO STUFF
+    listen(sd,12);
 
     free(hints);
     freeaddrinfo(results);
@@ -49,5 +66,6 @@ int main(){
     
     //****WIN-LOSE STATE****
     int ld = server_setup();
+    int cd = server_tcp_handshake(ld);
     return 0;
 }
