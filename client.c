@@ -29,9 +29,12 @@ int client_tcp_handshake(char * server_address) {
 
   return serverd;
 }
-
+char * prompt(int sd){
+  return NULL;
+}
 int main(){
     int sd = client_tcp_handshake(NULL);
-    
+    char* name = countryname();
+    write(sd, name, 100);
     return 0;
 }

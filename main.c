@@ -50,11 +50,11 @@ int server_setup(){
 }
 int main(){
     int year = 0;
-    printf("\nWelcome to RisC and DiplomaC! Defeat the rival nations and take control!\n");
+        //printf("\nWelcome to RisC and DiplomaC! Defeat the rival nations and take control!\n");
     //initiates data for the player nation
-    struct country* playernation = birth();
+        //struct country* playernation = birth();
     //initiates the data for the rivals
-    struct country** rivals = rivalbirth();
+        //struct country** rivals = rivalbirth();
     //terrainInit
     //**REPLACE W/ TERRAIN GEN
     //Below: Initializes diplomatic relations between all nations, semi-randomly
@@ -67,5 +67,8 @@ int main(){
     //****WIN-LOSE STATE****
     int ld = server_setup();
     int cd = server_tcp_handshake(ld);
+    char name[100];
+    read(cd,name,100);
+    printf("%s\n",name);
     return 0;
 }
