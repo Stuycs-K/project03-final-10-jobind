@@ -56,7 +56,13 @@ int server_setup(){
     return sd;
 }
 int main(){
+    /*TESTING SECTION START
+    printf("ABSTEST: %d, %d\n", abs(-88), abs(18));
+    return 0;
+    TESTING SECTION END*/
+
     int year, players, AIs;
+
     printf("Welcome to the server-side of RisC and DiplomaC! Please enter the number of clients that will be connecting: ");
     players = numprompt();
     printf("Waiting for connections...\n");
@@ -65,21 +71,21 @@ int main(){
         return 0;
     }
     
-    //****WIN-LOSE STATE****
     int ld = server_setup();
     int descs[players];
     for(int i=0; i<players; i++){
         descs[i]=server_tcp_handshake(ld);
     }
     printf("All connected!\n");
-    //char* curname;
+
     struct country* curcountry;
     for(int i=0; i<players; i++){
         //curname = calloc(100,sizeof(char));
         curcountry = calloc(1,sizeof(struct country));
         read(descs[i],curcountry,sizeof(struct country));
         //printf("%d: %s\n", i, curname);
-        printf("Data from nation %d received.\n", i);
+        printf("Initial data from nation %d received.\n", i);
     }
+
     return 0;
 }
