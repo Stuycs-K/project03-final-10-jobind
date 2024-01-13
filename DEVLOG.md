@@ -31,4 +31,6 @@ many players can join. Thought out player-player, robot-robot, and player-robot
 interactions. "robot" would just be the server file.
 
 ### 2024-01-11 - Established server-client infrastructure.
-Also updated the proposal match scope changes.
+Also updated the proposal to match scope changes.
+
+### (Weekend of) 2024-01-12 - One must imagine Sisyphus happy

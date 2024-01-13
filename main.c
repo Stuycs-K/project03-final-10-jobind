@@ -79,7 +79,7 @@ int main(){
         curcountry = calloc(1,sizeof(struct country));
         read(descs[i],curcountry,sizeof(struct country));
         //printf("%d: %s\n", i, curname);
-        printf("Data from nation %d received.", i);
+        printf("Data from nation %d received.\n", i);
     }
     return 0;
 }
