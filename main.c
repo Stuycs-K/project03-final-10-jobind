@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <errno.h>
 #include "player.h"
 #include "nation.h"
 #include "territory.h"
@@ -44,7 +45,14 @@ int server_setup(){
 
     //create socket
     int sd = socket(results->ai_family, results->ai_socktype, results->ai_protocol);
-
+    //EXPERIMENTAL CODE
+    int yes = 1;
+    if ( setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes)) == -1 ) {
+        printf("sockopt  error\n");
+        printf("%s\n",strerror(errno));
+        exit(-1);
+    }
+    //^^^^^^^
     bind(sd, results->ai_addr, results->ai_addrlen);
 
     //DO STUFF
@@ -55,16 +63,30 @@ int server_setup(){
     
     return sd;
 }
-//char * phaseinfo(int year, int phase, )
+char * phaseinfo(int year, int phase){
+    char*pi=malloc(100*sizeof(char));
+    char*p =malloc(100*sizeof(char));
+    if(phase==0) strcpy(p,"Economy");
+    if(phase==1) strcpy(p,"Diplomacy");
+    if(phase==2) strcpy(p,"War");
+    sprintf(pi,"Year: %d. Current Phase: %s\n",year,p);
+    return pi;
+}
+char * stats(struct country* c){
+    char*st=malloc(512*sizeof(char));
+    sprintf(st,"Stats about country %s:\nGDP:%d\nWealth:%d\nMilitary size:%d\n",c->name,c->GDP,c->wealth,c->military);
+    return st;
+}
 int main(){
     /*TESTING SECTION START
     printf("ABSTEST: %d, %d\n", abs(-88), abs(18));
     return 0;
     TESTING SECTION END*/
 
-    int year, players, AIs;
+    int year, players, AIs, phase;
+    year=0; phase=0;
 
-    printf("Welcome to the server-side of RisC and DiplomaC! Please enter the number of clients that will be connecting: ");
+  printf("Welcome to the server-side of RisC and DiplomaC! Please enter the number of clients that will be connecting: ");
     players = numprompt();
     printf("Waiting for connections...\n");
     if(players<=0){
@@ -94,6 +116,17 @@ int main(){
     for(int i=0; i<AIs; i++){
         char * t = aicountryname(i);
         strcpy(AIlist[i]->name,t);
+    }
+    //THE BIG LOOPOWSKI
+    while(year<3){
+      phase=0;
+      while(phase!=3){
+        for(int i=0; i<players; i++){
+          write(descs[i],phaseinfo(year,phase),100*sizeof(char));
+        }
+        phase++;
+      }
+      year++;
     }
     return 0;
 }

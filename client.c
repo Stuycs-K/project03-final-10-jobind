@@ -36,9 +36,19 @@ int main(){
     int sd = client_tcp_handshake(NULL);
     struct country* mycountry= birth();
     mycountry->GDP=0;
-    mycountry->wealth=0;
+    mycountry->wealth=1000;
     mycountry->military=0;
     write(sd, mycountry, sizeof(struct country));
-    printf("Waiting for server...\n");
+    while(1){
+      char*toprint=malloc(100*sizeof(char));
+      printf("Waiting for server...\n");
+      int s = read(sd,toprint,100*sizeof(char));
+      if(s==0){
+        break;
+      }
+      printf("%s",toprint);
+      fflush(stdout);
+    }
+    printf("Exiting....\n");
     return 0;
 }
