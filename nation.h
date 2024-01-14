@@ -18,3 +18,4 @@ struct domain {int size; /*struct terr*[40];TERRITORY STRUCT*/};
 //COMMENTS ON FUNCTIONS IN nation.c FILE
 int rivalcount();
 struct country** rivalbirth();
+char* aicountryname(int d);

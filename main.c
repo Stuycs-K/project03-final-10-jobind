@@ -55,6 +55,7 @@ int server_setup(){
     
     return sd;
 }
+//char * phaseinfo(int year, int phase, )
 int main(){
     /*TESTING SECTION START
     printf("ABSTEST: %d, %d\n", abs(-88), abs(18));
@@ -86,6 +87,13 @@ int main(){
         //printf("%d: %s\n", i, curname);
         printf("Initial data from nation %d received.\n", i);
     }
-
+    AIs = rivalcount();
+    struct country** AIlist = rivalbirth(AIs);
+    //AIs = sizeof(AIlist);
+    //printf("NUMBER OF AIS SELECTED: %d\n",AIs);
+    for(int i=0; i<AIs; i++){
+        char * t = aicountryname(i);
+        strcpy(AIlist[i]->name,t);
+    }
     return 0;
 }
