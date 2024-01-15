@@ -1,8 +1,11 @@
 struct terr {int fd; double biome; double prod; };
 struct tile {int base; int layer;};
+char * printer(struct country* c, int id);
+char tiletochar(int t);
+char layertochar(int l);
 struct terr * terrbirth(int dif, char* fname);
 int terraingen(double biome, double prod, char* fname);
 int* myrandom(int n);
-int abs(int x);
+double myabs(double x);
 double choosebiome(int dif);
 double myrandomdouble();

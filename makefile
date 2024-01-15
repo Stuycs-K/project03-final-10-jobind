@@ -20,3 +20,4 @@ clean:
 	rm -rf *.o
 	rm -rf game
 	rm -rf client
+	rm -rf *.region

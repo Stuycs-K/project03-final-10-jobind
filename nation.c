@@ -55,7 +55,7 @@ struct country** rivalbirth(int n){
 }
 //Messed around in desmos for an interesting mapping from [0,1] to [0.6,0.85]
 double smoothinate(double r){
-    int x = abs(r);
+    double x = myabs(r);
     return (x-0.3+1/(x+0.5))/2;
 }
 //Returns -1 if failed, else returns the effect on GDP;

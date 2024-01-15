@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "nation.h"
+#include "territory.h"
 //command-end of info cmd
 char * stats(struct country* c){
     char*st=malloc(1000*sizeof(char));
@@ -12,7 +13,7 @@ char * stats(struct country* c){
 //checks if the player forgot an argument for a known command
 int checknewline(char * cmd){
   if(strlen(cmd)==0) return 0;
-  if(strcmp(cmd,"invest\n")==0||strcmp(cmd,"train\n")==0){
+  if(strcmp(cmd,"invest\n")==0||strcmp(cmd,"train\n")==0||strcmp(cmd,"view\n")==0){
     return 1;
   }
   return 0;
@@ -50,6 +51,11 @@ char* cmdhandler(char*arg,int phase,struct country* c){
         sprintf(outstring,"Troops increased by %d. Urah!\n",tres);
       }
       return outstring;
+    } else if(strcmp(cmd,"view")==0){
+      int d[1];
+      sscanf(arg, "%d", d);
+      strcpy(outstring,printer(c,d[0]));
+      return outstring;
     } else{
       strcpy(outstring,"Unkown command, please try again or type help for more info.\n");
       return outstring;
@@ -73,6 +79,7 @@ char* helper(int phase){
     strcpy(p,"Help for Economy phase:\
     \ninvest amount - Will take amount from wealth and increase the GDP.\
     \ntrain  amount - Will train proportional* amount of troops, subtracting amount from wealth.\
+    \nview   id     - Displays the land owned with ID id. You start with owning IDs 0,1, and 2.\
     \nfinish        - Finishes your turn in the economy phase.\
     \ninfo          - Lists the info about the other countries\
     \n");

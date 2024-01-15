@@ -82,7 +82,7 @@ char * phaseinfo(int year, int phase){
 }
 int main(){
   //TESTING SECTION START
-  //printf("ABSTEST: %d, %d\n", abs(-88), abs(18));
+  //printf("ABSTEST: %lf, %lf\n", myabs(myrandomdouble()), myabs(myrandomdouble()));
   //printf("randsTEST. myrand: %d, myranddouble: %lf\n", myrandom(1)[0], myrandomdouble());
   //return 0;
   //TESTING SECTION END
@@ -113,7 +113,7 @@ int main(){
         curcountry->domain=calloc(7,sizeof(struct terr));
         for(int j=0; j<3; j++){
           char * pfilename = malloc(200*sizeof(char));
-          sprintf(pfilename,"(%d,%d)",i,j);
+          sprintf(pfilename,"_%d_%d_",i,j);
           curcountry->domain[j]=*terrbirth(curcountry->dif,pfilename);
         }
         //printf("%d: %s\n", i, curname);
