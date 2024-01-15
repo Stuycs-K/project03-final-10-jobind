@@ -37,3 +37,5 @@ Also updated the proposal to match scope changes.
 Added file management for territories and creation of territory based off of
 difficulty and randomness. Added phase structure (economy, diplomacy, war), and
 working on the command system.
+Added terrain initialization for clients and created command system (with working
+help command)

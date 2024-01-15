@@ -5,7 +5,7 @@
 #include "player.h"
 #include "territory.h"
 //NOTES IN h FILE:
-struct country {int dif; int GDP; int wealth; int military; char name[100]; struct domain* _domain; };
+struct country {int dif; int GDP; int wealth; int military; char name[100]; struct terr* domain; };
 //function lets the player select how many enemy nations there are
 char* aicountryname(int d){
     while(1){

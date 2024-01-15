@@ -23,6 +23,7 @@ char* helper(int phase){
     \ninvest amount - Will take amount from wealth and increase the GDP.\
     \ntrain  amount - Will train amount troops, subtracting amount from wealth.\
     \nfinish        - Finishes your turn in the economy phase.\
+    \ninfo          - Lists the info about the other countries\
     \n");
     return p;
   }
@@ -129,6 +130,12 @@ int main(){
         //curname = calloc(100,sizeof(char));
         curcountry = calloc(1,sizeof(struct country));
         read(descs[i],curcountry,sizeof(struct country));
+        curcountry->domain=calloc(7,sizeof(struct terr));
+        for(int j=0; j<3; j++){
+          char * pfilename = malloc(200*sizeof(char));
+          sprintf(pfilename,"(%d,%d)",i,j);
+          curcountry->domain[j]=*terrbirth(curcountry->dif,pfilename);
+        }
         //printf("%d: %s\n", i, curname);
         printf("Initial data from nation %d received.\n", i);
     }
@@ -147,32 +154,27 @@ int main(){
       while(phase!=3){
         //each player gets a turn for each phase
         for(int i=0; i<players; i++){
-          char*phinf=phaseinfo(year,phase);
-          write(descs[i],phinf,100*sizeof(char));
           //each turn can have multiple commands
-          
-          /*
           while(1){
+            char*phinf=phaseinfo(year,phase);
+            write(descs[i],phinf,100*sizeof(char));
             char * curcmd = malloc(1000*sizeof(char));
-            read(ld,curcmd,1000*sizeof(char));
+            read(descs[i],curcmd,1000*sizeof(char));
             if(strcmp(curcmd,"help\n")==0||strcmp(curcmd,"Help\n")==0){
               char* helpstr = helper(phase);
-              write(ld,helpstr,1000*sizeof(char));
+              write(descs[i],helpstr,1000*sizeof(char));
               free(helpstr);
             } else{
-              write(ld,NULL,0);
+              char * towritecmd = malloc(1000*sizeof(char));//REPLACE w/ cmd handler
+              write(descs[i],towritecmd,1000*sizeof(char));
             }
             free(curcmd);
-          }*/
-
-          free(phinf);
+            free(phinf);
+          }
         }
-
         phase++;
       }
-
       year++;
     }
-
     return 0;
 }

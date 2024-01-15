@@ -49,13 +49,18 @@ int main(){
     printf("Waiting for server...\n");
     int s = read(sd,toprint,100*sizeof(char));
     if(s==0){
-      break;
+      printf("No phaseinfo written to client!!! Exiting...\n");
+      return 1;
     }
+    printf("---------------\n");
     printf("%s",toprint);
     fflush(stdout);
     free(toprint);
     printf("Type commands to control your country! Type help for more info.\n");
     prompt(sd);
+    char*cmdtoprint=malloc(1000*sizeof(char));
+    read(sd,cmdtoprint,1000*sizeof(char));
+    printf("%s\n",cmdtoprint);
   }
 
   printf("Exiting....\n");
