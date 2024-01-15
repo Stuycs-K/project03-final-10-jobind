@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "player.h"
+#include "territory.h"
 //NOTES IN h FILE:
 struct country {int dif; int GDP; int wealth; int military; char name[100]; struct domain* _domain; };
 //function lets the player select how many enemy nations there are
@@ -51,4 +52,16 @@ struct country** rivalbirth(int n){
         w[i]=nationsetup(name,d);
     }
     return w;
+}
+//Messed around in desmos for an interesting mapping from [0,1] to [0.6,0.85]
+double smoothinate(double r){
+    int x = abs(r);
+    return (x-0.3+1/(x+0.5))/2;
+}
+//Returns -1 if failed, else returns the effect on GDP;
+int invest(struct country* c, int d){
+    if(d>c->wealth) return -1;
+    int dGDP = (int)(smoothinate(myrandomdouble())*d);
+    c->GDP+=dGDP;
+    return dGDP;
 }

@@ -11,9 +11,30 @@
 #include "nation.h"
 #include "territory.h"
 /*Accept a connection from a client
- *return the to_client socket descriptor
- *blocks until connection is made.
- */
+*return the to_client socket descriptor
+*blocks until connection is made.
+*/
+
+//prints out the commands based on phase. 0=econ,1=diplom,2=war
+char* helper(int phase){
+  char*p =malloc(1000*sizeof(char));
+  if(phase==0){
+    strcpy(p,"Help for Economy phase:\
+    \ninvest amount - Will take amount from wealth and increase the GDP.\
+    \ntrain  amount - Will train amount troops, subtracting amount from wealth.\
+    \nfinish        - Finishes your turn in the economy phase.\
+    \n");
+    return p;
+  }
+  if(phase==1){
+    strcpy(p,"Diplomacy");
+    return "";
+  }
+  if(phase==2){
+    strcpy(p,"War");
+    return "";
+  }
+}
 int numprompt(){
     int d[1];
     char s[100];
@@ -70,6 +91,7 @@ char * phaseinfo(int year, int phase){
     if(phase==1) strcpy(p,"Diplomacy");
     if(phase==2) strcpy(p,"War");
     sprintf(pi,"Year: %d. Current Phase: %s\n",year,p);
+    free(p);
     return pi;
 }
 char * stats(struct country* c){
@@ -78,13 +100,14 @@ char * stats(struct country* c){
     return st;
 }
 int main(){
-    /*TESTING SECTION START
-    printf("ABSTEST: %d, %d\n", abs(-88), abs(18));
-    return 0;
-    TESTING SECTION END*/
+  //TESTING SECTION START
+  //printf("ABSTEST: %d, %d\n", abs(-88), abs(18));
+  //printf("randsTEST. myrand: %d, myranddouble: %lf\n", myrandom(1)[0], myrandomdouble());
+  //return 0;
+  //TESTING SECTION END
 
-    int year, players, AIs, phase;
-    year=0; phase=0;
+  int year, players, AIs, phase;
+  year=0; phase=0;
 
   printf("Welcome to the server-side of RisC and DiplomaC! Please enter the number of clients that will be connecting: ");
     players = numprompt();
@@ -120,13 +143,36 @@ int main(){
     //THE BIG LOOPOWSKI
     while(year<3){
       phase=0;
+      //each phase gets cycled through
       while(phase!=3){
+        //each player gets a turn for each phase
         for(int i=0; i<players; i++){
-          write(descs[i],phaseinfo(year,phase),100*sizeof(char));
+          char*phinf=phaseinfo(year,phase);
+          write(descs[i],phinf,100*sizeof(char));
+          //each turn can have multiple commands
+          
+          /*
+          while(1){
+            char * curcmd = malloc(1000*sizeof(char));
+            read(ld,curcmd,1000*sizeof(char));
+            if(strcmp(curcmd,"help\n")==0||strcmp(curcmd,"Help\n")==0){
+              char* helpstr = helper(phase);
+              write(ld,helpstr,1000*sizeof(char));
+              free(helpstr);
+            } else{
+              write(ld,NULL,0);
+            }
+            free(curcmd);
+          }*/
+
+          free(phinf);
         }
+
         phase++;
       }
+
       year++;
     }
+
     return 0;
 }

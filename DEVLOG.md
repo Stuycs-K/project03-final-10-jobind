@@ -35,4 +35,5 @@ Also updated the proposal to match scope changes.
 
 ### (Weekend of) 2024-01-12 - One must imagine Sisyphus happy
 Added file management for territories and creation of territory based off of
-difficulty and randomness
+difficulty and randomness. Added phase structure (economy, diplomacy, war), and
+working on the command system.

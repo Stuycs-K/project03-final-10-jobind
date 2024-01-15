@@ -5,3 +5,4 @@ int terraingen(double biome, double prod);
 int* myrandom(int n);
 int abs(int x);
 double choosebiome(int dif);
+double myrandomdouble();

@@ -19,3 +19,5 @@ struct domain {int size; /*struct terr*[40];TERRITORY STRUCT*/};
 int rivalcount();
 struct country** rivalbirth();
 char* aicountryname(int d);
+double smoothinate(double r);
+int invest(struct country* c, int d);

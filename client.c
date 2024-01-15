@@ -30,25 +30,34 @@ int client_tcp_handshake(char * server_address) {
   return serverd;
 }
 char * prompt(int sd){
-  return NULL;
+  printf("What do you do?: ");
+  char *s = malloc(100*sizeof(char*));
+  fgets(s,100,stdin);
+  write(sd,s,100*sizeof(char));
+  return s;
 }
 int main(){
-    int sd = client_tcp_handshake(NULL);
-    struct country* mycountry= birth();
-    mycountry->GDP=0;
-    mycountry->wealth=1000;
-    mycountry->military=0;
-    write(sd, mycountry, sizeof(struct country));
-    while(1){
-      char*toprint=malloc(100*sizeof(char));
-      printf("Waiting for server...\n");
-      int s = read(sd,toprint,100*sizeof(char));
-      if(s==0){
-        break;
-      }
-      printf("%s",toprint);
-      fflush(stdout);
+  int sd = client_tcp_handshake(NULL);
+  struct country* mycountry= birth();
+  mycountry->GDP=0;
+  mycountry->wealth=1000;
+  mycountry->military=0;
+  write(sd, mycountry, sizeof(struct country));
+  //BIG LOOP CLIENTSIDE
+  while(1){
+    char*toprint=malloc(100*sizeof(char));
+    printf("Waiting for server...\n");
+    int s = read(sd,toprint,100*sizeof(char));
+    if(s==0){
+      break;
     }
-    printf("Exiting....\n");
-    return 0;
+    printf("%s",toprint);
+    fflush(stdout);
+    free(toprint);
+    printf("Type commands to control your country! Type help for more info.\n");
+    prompt(sd);
+  }
+
+  printf("Exiting....\n");
+  return 0;
 }
