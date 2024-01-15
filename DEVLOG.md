@@ -40,3 +40,4 @@ working on the command system.
 Added terrain initialization for clients and created command system (with working
 help command)
 Clients can now finish their turn of a phase with the finish command.
+Got investment working and further developed command processing

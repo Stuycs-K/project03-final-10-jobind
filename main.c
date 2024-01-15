@@ -80,11 +80,6 @@ char * phaseinfo(int year, int phase){
     free(p);
     return pi;
 }
-char * stats(struct country* c){
-    char*st=malloc(512*sizeof(char));
-    sprintf(st,"Stats about country %s:\nGDP:%d\nWealth:%d\nMilitary size:%d\n",c->name,c->GDP,c->wealth,c->military);
-    return st;
-}
 int main(){
   //TESTING SECTION START
   //printf("ABSTEST: %d, %d\n", abs(-88), abs(18));
@@ -109,7 +104,7 @@ int main(){
         descs[i]=server_tcp_handshake(ld);
     }
     printf("All connected!\n");
-
+    struct country** PCList = malloc(players*sizeof(struct country*));
     struct country* curcountry;
     for(int i=0; i<players; i++){
         //curname = calloc(100,sizeof(char));
@@ -122,6 +117,7 @@ int main(){
           curcountry->domain[j]=*terrbirth(curcountry->dif,pfilename);
         }
         //printf("%d: %s\n", i, curname);
+        PCList[i]=curcountry;
         printf("Initial data from nation %d received.\n", i);
     }
     AIs = rivalcount();
@@ -160,7 +156,7 @@ int main(){
               
             //otherwise, process the command (phase-dependant)
             } else{
-              char * towritecmd = malloc(1000*sizeof(char));//REPLACE w/ cmd handler
+              char * towritecmd = cmdhandler(curcmd,phase,PCList[i]);//REPLACE w/ cmd handler
               write(descs[i],towritecmd,1000*sizeof(char));
             }
             free(curcmd);

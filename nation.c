@@ -63,5 +63,6 @@ int invest(struct country* c, int d){
     if(d>c->wealth) return -1;
     int dGDP = (int)(smoothinate(myrandomdouble())*d);
     c->GDP+=dGDP;
+    c->wealth-=d;
     return dGDP;
 }

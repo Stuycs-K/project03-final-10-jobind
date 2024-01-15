@@ -1,3 +1,4 @@
+//DONT FORGET TO COMMENT THIS FILE. THIS IS DENSE CODE, STUPID
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

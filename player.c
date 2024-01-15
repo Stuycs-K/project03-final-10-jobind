@@ -3,21 +3,57 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "nation.h"
+//command-end of info cmd
+char * stats(struct country* c){
+    char*st=malloc(1000*sizeof(char));
+    sprintf(st,"Stats about country %s:\nGDP:%d\nWealth:%d\nMilitary size:%d\n",c->name,c->GDP,c->wealth,c->military);
+    return st;
+}
+//checks if the player forgot an argument for a known command
+int checknewline(char * cmd){
+  if(strlen(cmd)==0) return 0;
+  if(strcmp(cmd,"invest\n")==0||strcmp(cmd,"train\n")==0){
+    return 1;
+  }
+  return 0;
+}
 //processes command input
-char* cmdhandler(char*cmd,int phase,struct country* c){
+char* cmdhandler(char*arg,int phase,struct country* c){
+  char*cmd = strsep(&arg," ");
   char*outstring=calloc(1000,sizeof(char));
   if(strcmp(cmd,"info\n")==0){
-
+    strcpy(outstring,stats(c));
+    return outstring;
   }
   if(phase==0){
-
+    if(checknewline(cmd)){
+      sprintf(outstring,"The %s command needs an argument. Type help for clarification.\n",cmd);
+      return outstring;
+    }
+    if(strcmp(cmd,"invest")==0){
+      int d[1];
+      sscanf(arg, "%d", d);
+      int invres = invest(c,d[0]); //investment result
+      if(invres==-1){
+        strcpy(outstring,"Investment failed, insufficient funds. Try a lower amount, brokey.\n");
+      } else{
+        sprintf(outstring,"GDP increased by %d. Congrats.\n",invres);
+      }
+      return outstring;
+    } else{
+      strcpy(outstring,"Unkown command, please try again or type help for more info.\n");
+      return outstring;
+    }
   }
   if(phase==1){
-
+    strcpy(outstring,"You are in the Diplomacy Phase DEBUG!!!\n");
+    return outstring;
   }
   if(phase==2){
-
+    strcpy(outstring,"You are in the War Phase DEBUG!!!\n");
+    return outstring;
   }
+  strcpy(outstring,"PHASE ERROR IN cmdhandler()!\n");
   return outstring;
 }
 //prints out the commands based on phase. 0=econ,1=diplom,2=war
