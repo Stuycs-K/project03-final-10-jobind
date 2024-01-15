@@ -3,6 +3,44 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "nation.h"
+//processes command input
+char* cmdhandler(char*cmd,int phase,struct country* c){
+  char*outstring=calloc(1000,sizeof(char));
+  if(strcmp(cmd,"info\n")==0){
+
+  }
+  if(phase==0){
+
+  }
+  if(phase==1){
+
+  }
+  if(phase==2){
+
+  }
+  return outstring;
+}
+//prints out the commands based on phase. 0=econ,1=diplom,2=war
+char* helper(int phase){
+  char*p =malloc(1000*sizeof(char));
+  if(phase==0){
+    strcpy(p,"Help for Economy phase:\
+    \ninvest amount - Will take amount from wealth and increase the GDP.\
+    \ntrain  amount - Will train amount troops, subtracting amount from wealth.\
+    \nfinish        - Finishes your turn in the economy phase.\
+    \ninfo          - Lists the info about the other countries\
+    \n");
+    return p;
+  }
+  if(phase==1){
+    strcpy(p,"Diplomacy");
+    return "";
+  }
+  if(phase==2){
+    strcpy(p,"War");
+    return "";
+  }
+}
 //This initializes persistant vlaues relevant to the player nation. int difficulty ranges from 1 to 4
 //Returns a pointer to struct country, found in nation.h containing the data for the player nation
 struct country* playersetup(char*_name,int _dif){

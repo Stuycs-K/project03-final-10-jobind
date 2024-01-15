@@ -10,32 +10,7 @@
 #include "player.h"
 #include "nation.h"
 #include "territory.h"
-/*Accept a connection from a client
-*return the to_client socket descriptor
-*blocks until connection is made.
-*/
-
-//prints out the commands based on phase. 0=econ,1=diplom,2=war
-char* helper(int phase){
-  char*p =malloc(1000*sizeof(char));
-  if(phase==0){
-    strcpy(p,"Help for Economy phase:\
-    \ninvest amount - Will take amount from wealth and increase the GDP.\
-    \ntrain  amount - Will train amount troops, subtracting amount from wealth.\
-    \nfinish        - Finishes your turn in the economy phase.\
-    \ninfo          - Lists the info about the other countries\
-    \n");
-    return p;
-  }
-  if(phase==1){
-    strcpy(p,"Diplomacy");
-    return "";
-  }
-  if(phase==2){
-    strcpy(p,"War");
-    return "";
-  }
-}
+//gets and returns a number from the user
 int numprompt(){
     int d[1];
     char s[100];
@@ -43,6 +18,10 @@ int numprompt(){
     sscanf(s,"%d",d);
     return *d;
 }
+/*Accept a connection from a client
+*return the to_client socket descriptor
+*blocks until connection is made.
+*/
 int server_tcp_handshake(int listen_socket){
     int client_socket;
     socklen_t sock_size;
@@ -85,12 +64,18 @@ int server_setup(){
     
     return sd;
 }
+//turns the phase int into a printable
+char * phasetostring(int phase){
+  char*p =malloc(100*sizeof(char));
+  if(phase==0) strcpy(p,"Economy");
+  if(phase==1) strcpy(p,"Diplomacy");
+  if(phase==2) strcpy(p,"War");
+  return p;
+}
+//constructs standard string "year: . phase: ."
 char * phaseinfo(int year, int phase){
     char*pi=malloc(100*sizeof(char));
-    char*p =malloc(100*sizeof(char));
-    if(phase==0) strcpy(p,"Economy");
-    if(phase==1) strcpy(p,"Diplomacy");
-    if(phase==2) strcpy(p,"War");
+    char*p=phasetostring(phase);
     sprintf(pi,"Year: %d. Current Phase: %s\n",year,p);
     free(p);
     return pi;
@@ -160,10 +145,20 @@ int main(){
             write(descs[i],phinf,100*sizeof(char));
             char * curcmd = malloc(1000*sizeof(char));
             read(descs[i],curcmd,1000*sizeof(char));
+            //if the player types help (anyphase)
             if(strcmp(curcmd,"help\n")==0||strcmp(curcmd,"Help\n")==0){
               char* helpstr = helper(phase);
               write(descs[i],helpstr,1000*sizeof(char));
               free(helpstr);
+            //if the player types finish (anyphase)
+            } else if(strcmp(curcmd,"finish\n")==0){
+              char* finishstr = calloc(1000,sizeof(char));
+              sprintf(finishstr,"Finished with phase %s.\n",phasetostring(phase));
+              write(descs[i],finishstr,1000*sizeof(char));
+              free(finishstr);
+              break; //DEVIOUS USE OF BREAK
+              
+            //otherwise, process the command (phase-dependant)
             } else{
               char * towritecmd = malloc(1000*sizeof(char));//REPLACE w/ cmd handler
               write(descs[i],towritecmd,1000*sizeof(char));
