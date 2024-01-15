@@ -40,6 +40,16 @@ char* cmdhandler(char*arg,int phase,struct country* c){
         sprintf(outstring,"GDP increased by %d. Congrats.\n",invres);
       }
       return outstring;
+    } else if(strcmp(cmd,"train")==0){
+      int d[1];
+      sscanf(arg, "%d", d);
+      int tres = train(c,d[0]); //troop training result
+      if(tres==-1){
+        strcpy(outstring,"Training failed, your troops starved a little. Try to train fewer!\n");
+      } else{
+        sprintf(outstring,"Troops increased by %d. Urah!\n",tres);
+      }
+      return outstring;
     } else{
       strcpy(outstring,"Unkown command, please try again or type help for more info.\n");
       return outstring;
@@ -62,7 +72,7 @@ char* helper(int phase){
   if(phase==0){
     strcpy(p,"Help for Economy phase:\
     \ninvest amount - Will take amount from wealth and increase the GDP.\
-    \ntrain  amount - Will train amount troops, subtracting amount from wealth.\
+    \ntrain  amount - Will train proportional* amount of troops, subtracting amount from wealth.\
     \nfinish        - Finishes your turn in the economy phase.\
     \ninfo          - Lists the info about the other countries\
     \n");

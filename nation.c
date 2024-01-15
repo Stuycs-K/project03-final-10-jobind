@@ -66,3 +66,10 @@ int invest(struct country* c, int d){
     c->wealth-=d;
     return dGDP;
 }
+int train(struct country* c, int d){
+    if(d>c->wealth) return -1;
+    int dT = (int)(2*smoothinate(myrandomdouble())*d);
+    c->military+=dT;
+    c->wealth-=d;
+    return dT;
+}
