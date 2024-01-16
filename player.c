@@ -62,11 +62,11 @@ char* cmdhandler(char*arg,int phase,struct country* c){
     }
   }
   if(phase==1){
-    strcpy(outstring,"You are in the Diplomacy Phase DEBUG!!!\n");
+    strcpy(outstring,"Unknown Command!\n");
     return outstring;
   }
   if(phase==2){
-    strcpy(outstring,"You are in the War Phase DEBUG!!!\n");
+    strcpy(outstring,"Unknown Command!\n");
     return outstring;
   }
   strcpy(outstring,"PHASE ERROR IN cmdhandler()!\n");
@@ -81,17 +81,27 @@ char* helper(int phase){
     \ntrain  amount - Will train proportional* amount of troops, subtracting amount from wealth.\
     \nview   id     - Displays the land owned with ID id. You start with owning IDs 0,1, and 2.\
     \nfinish        - Finishes your turn in the economy phase.\
-    \ninfo          - Lists the info about the other countries\
+    \ninfo          - Lists the info about your country\
     \n");
     return p;
   }
   if(phase==1){
-    strcpy(p,"Diplomacy");
-    return "";
+    strcpy(p,"Help for Diplomacy phase:\
+    \nlist          - Lists the other nations in the game and info about them.\
+    \ndiplom whom   - Subtracts 200 from wealth, and attempts to make an alliance with the nation named whom.\
+    \nfinish        - Finishes your turn in the diplomacy phase.\
+    \ninfo          - Lists the info about your country\
+    \n");
+    return p;
   }
   if(phase==2){
-    strcpy(p,"War");
-    return "";
+    strcpy(p,"Help for War phase:\
+    \nlist          - Lists the other nations in the game and info about them.\
+    \nwar whom      - Attacks the naiton: whom. If your military is greater, you win, take their GDP, and kill them.\
+    \nfinish        - Finishes your turn in the diplomacy phase.\
+    \ninfo          - Lists the info about your country\
+    \n");
+    return p;
   }
 }
 //This initializes persistant vlaues relevant to the player nation. int difficulty ranges from 1 to 4
@@ -137,6 +147,6 @@ struct country* birth(){
     int dif = difficultyselect();
     printf("DIFFICULTY SELECTED: %d\n", dif);
     struct country* c = playersetup(s,dif);
-    printf("Congratulations! You have founed the nation of %s!\n", s);
+    printf("Congratulations! You have founded the nation of %s!\n", s);
     return c;
 }

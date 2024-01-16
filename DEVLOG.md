@@ -44,3 +44,7 @@ Got investment working and further developed command processing.
 Got troop training working (very similar to invest).
 Debugged terrain displayer (works fully)
 Introduced end-of-year events, like GDP->wealth.
+Broke into the diplomacy phase. Player countries can try to form alliances with each
+other, and can respond to said alliances. Created list command to see data about other nations.
+Warring is possible and functional. Two end states exist: wealth and conquest.
+I'll see myself out.

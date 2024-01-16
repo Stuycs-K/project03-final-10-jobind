@@ -73,3 +73,9 @@ int train(struct country* c, int d){
     c->wealth-=d;
     return dT;
 }
+int findc(struct country**w,int size,char*cname){
+    for(int i=0; i<size; i++){
+        if(strcmp(w[i]->name,cname)==0) return i;
+    }
+    return -1;
+}

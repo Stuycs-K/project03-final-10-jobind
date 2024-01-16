@@ -56,11 +56,28 @@ int main(){
     printf("%s",toprint);
     fflush(stdout);
     free(toprint);
-    printf("Type commands to control your country! Type help for more info.\n");
-    prompt(sd);
-    char*cmdtoprint=malloc(1000*sizeof(char));
-    read(sd,cmdtoprint,1000*sizeof(char));
-    printf("%s\n",cmdtoprint);
+    char*check=calloc(1000,sizeof(char));
+    read(sd,check,1000*sizeof(char));
+    if(strlen(check)!=0){
+      printf("%s",check);
+      fflush(stdout);
+      if(check[0]!='#'){
+        prompt(sd);
+        char*cmdtoprint=malloc(1000*sizeof(char));
+        read(sd,cmdtoprint,1000*sizeof(char));
+        printf("%s\n",cmdtoprint);
+        free(cmdtoprint);
+      }
+      free(check);
+    }else{
+      free(check);
+      printf("Type commands to control your country! Type help for more info.\n");
+      prompt(sd);
+      char*cmdtoprint=malloc(1000*sizeof(char));
+      read(sd,cmdtoprint,1000*sizeof(char));
+      printf("%s\n",cmdtoprint);
+      free(cmdtoprint);
+    }
   }
 
   printf("Exiting....\n");

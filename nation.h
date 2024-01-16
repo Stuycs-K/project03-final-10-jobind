@@ -21,3 +21,4 @@ char* aicountryname(int d);
 double smoothinate(double r);
 int invest(struct country* c, int d);
 int train(struct country* c, int d);
+int findc(struct country**w,int size,char*cname);
