@@ -163,7 +163,17 @@ int main(){
             free(phinf);
           }
         }
+        //Each AI goes
+        for(int i=0; i<0; i++){
+          //blahblahblah
+        }
         phase++;
+      }
+      for(int i=0; i<players; i++){
+        PCList[i]->wealth+=PCList[i]->GDP;
+      }
+      for(int i=0; i<AIs; i++){
+        AIlist[i]->wealth+=AIlist[i]->GDP;
       }
       year++;
     }

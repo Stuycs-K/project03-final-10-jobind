@@ -39,12 +39,12 @@ char * printer(struct country* c,int id){
         for(int j=0; j<30; j++){
             char t = tiletochar(tileset[30*i+j].base);
             char l = layertochar(tileset[30*i+j].layer);
-            printf("(%c,%c) ",t,l);//TESTING
+            //printf("(%c,%c) ",t,l);//TESTING
             fflush(stdout);
             if(l=='\0'){
-                strcat(outstring,&t);
+                strncat(outstring,&t,1);
             } else{
-                strcat(outstring,&l);
+                strncat(outstring,&l,1);
             }
         }
         strcat(outstring,"\n");
@@ -82,12 +82,12 @@ int terraingen(double biome, double prod, char*fname){
     struct tile* tileset = malloc(30*30*sizeof(struct tile));
     for(int i=0; i<30*30; i++){
         double r = myabs(myrandomdouble());
-        tileset[i].base=0;
+        tileset[i].base=1;
         tileset[i].layer=0;
-        //if(r<0.15){tileset[i].layer=1;}
-        //if(r<0.05){tileset[i].layer=2;}
+        if(r<0.15){tileset[i].layer=1;}
+        if(r<0.05){tileset[i].layer=2;}
         r = myabs(myrandomdouble());
-        //if(r<0.15){tileset[i].base=0;}
+        if(r<0.15){tileset[i].base=0;}
     }
     int k = write(_fd,tileset,30*30*sizeof(struct tile));
     //printf("BYTES WRITTEN SUCCESSFULLY: %d\n", k);//TESTING
