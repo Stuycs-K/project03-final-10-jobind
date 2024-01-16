@@ -8,11 +8,9 @@ David Jobin
 
 I set out to create a single or multiplayer, civ-like strategy game, focused on diplomacy and management.
 The players control nation-states and compete against "AI" (Randomly controlled) opponent nations.
-The goal is to demonstrate national superiority through one of three ways:
+The goal is to demonstrate national superiority through one of two ways:
        By Eliminating all rival nations,
-       By controlling a majority of the world's GDP,
-       or By creating a world-dominating military alliance.
-    
+       By Having more than 2000 wealth.
 # Intended usage:
 
 Each player turn will represent a year of running their country.
